@@ -35,7 +35,7 @@ namespace SOS.Hosting.Interop
         [PreserveSig] int GetILForModule(ulong module, uint rva, ulong* il);
 
         // Threads
-        [PreserveSig] int GetThreadData(ulong thread, void* data);
+        [PreserveSig] int GetThreadData(ulong thread, DacpThreadData* data);
         [PreserveSig] int GetThreadFromThinlockID(uint thinLockId, ulong* thread);
         [PreserveSig] int GetStackLimits(ulong thread, ulong* lower, ulong* upper, ulong* framePointer);
 
@@ -59,7 +59,7 @@ namespace SOS.Hosting.Interop
         [PreserveSig] int GetHillClimbingLogEntry(ulong address, void* data);
 
         // Objects
-        [PreserveSig] int GetObjectData(ulong address, void* data);
+        [PreserveSig] int GetObjectData(ulong address, DacpObjectData* data);
         [PreserveSig] int GetObjectStringData(ulong address, uint count, char* value, uint* needed);
         [PreserveSig] int GetObjectClassName(ulong address, uint count, char* name, uint* needed);
 
@@ -95,7 +95,7 @@ namespace SOS.Hosting.Interop
         [PreserveSig] int GetThreadLocalModuleData(ulong thread, uint index, void* data);
 
         // Sync blocks
-        [PreserveSig] int GetSyncBlockData(uint number, void* data);
+        [PreserveSig] int GetSyncBlockData(uint number, DacpSyncBlockData* data);
         [PreserveSig] int GetSyncBlockCleanupData(ulong address, void* data);
 
         // Handles
@@ -113,7 +113,7 @@ namespace SOS.Hosting.Interop
         [PreserveSig] int GetCodeHeapList(ulong jitManager, uint count, void* codeHeaps, uint* needed);
         [PreserveSig] int TraverseVirtCallStubHeap(ulong appDomain, int heapType, delegate* unmanaged[Cdecl]<ulong, nuint, int, void> callback);
 
-        [PreserveSig] int GetUsefulGlobals(void* data);
+        [PreserveSig] int GetUsefulGlobals(DacpUsefulGlobalsData* data);
         [PreserveSig] int GetClrWatsonBuckets(ulong thread, void* genericModeBlock);
         [PreserveSig] int GetTLSIndex(uint* index);
         [PreserveSig] int GetDacModuleHandle(nint* moduleHandle);
