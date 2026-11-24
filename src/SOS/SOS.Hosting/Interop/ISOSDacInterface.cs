@@ -13,7 +13,7 @@ namespace SOS.Hosting.Interop
     public unsafe partial interface ISOSDacInterface
     {
         // Thread store
-        [PreserveSig] int GetThreadStoreData(void* data);
+        [PreserveSig] int GetThreadStoreData(DacpThreadStoreData* data);
 
         // App domains
         [PreserveSig] int GetAppDomainStoreData(DacpAppDomainStoreData* data);
@@ -65,12 +65,12 @@ namespace SOS.Hosting.Interop
 
         // Method tables
         [PreserveSig] int GetMethodTableName(ulong methodTable, uint count, char* name, uint* needed);
-        [PreserveSig] int GetMethodTableData(ulong methodTable, void* data);
+        [PreserveSig] int GetMethodTableData(ulong methodTable, DacpMethodTableData* data);
         [PreserveSig] int GetMethodTableSlot(ulong methodTable, uint slot, ulong* value);
-        [PreserveSig] int GetMethodTableFieldData(ulong methodTable, void* data);
+        [PreserveSig] int GetMethodTableFieldData(ulong methodTable, DacpMethodTableFieldData* data);
         [PreserveSig] int GetMethodTableTransparencyData(ulong methodTable, void* data);
         [PreserveSig] int GetMethodTableForEEClass(ulong eeClass, ulong* methodTable);
-        [PreserveSig] int GetFieldDescData(ulong fieldDesc, void* data);
+        [PreserveSig] int GetFieldDescData(ulong fieldDesc, DacpFieldDescData* data);
         [PreserveSig] int GetFrameName(ulong frameVtable, uint count, char* name, uint* needed);
 
         // PE files
@@ -89,10 +89,10 @@ namespace SOS.Hosting.Interop
         [PreserveSig] int GetHeapAnalyzeStaticData(void* data);
 
         // Domain-local and thread-local storage
-        [PreserveSig] int GetDomainLocalModuleData(ulong address, void* data);
-        [PreserveSig] int GetDomainLocalModuleDataFromAppDomain(ulong appDomain, int moduleId, void* data);
-        [PreserveSig] int GetDomainLocalModuleDataFromModule(ulong module, void* data);
-        [PreserveSig] int GetThreadLocalModuleData(ulong thread, uint index, void* data);
+        [PreserveSig] int GetDomainLocalModuleData(ulong address, DacpDomainLocalModuleData* data);
+        [PreserveSig] int GetDomainLocalModuleDataFromAppDomain(ulong appDomain, int moduleId, DacpDomainLocalModuleData* data);
+        [PreserveSig] int GetDomainLocalModuleDataFromModule(ulong module, DacpDomainLocalModuleData* data);
+        [PreserveSig] int GetThreadLocalModuleData(ulong thread, uint index, DacpThreadLocalModuleData* data);
 
         // Sync blocks
         [PreserveSig] int GetSyncBlockData(uint number, DacpSyncBlockData* data);

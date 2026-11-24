@@ -25,16 +25,19 @@ namespace SOS.Hosting.Interop
     {
         [FieldOffset(4)]
         public uint OsThreadId;
+
+        [FieldOffset(0x28)]
+        public ulong Domain;
+
+        [FieldOffset(0x60)]
+        public ulong NextThread;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x60)]
-    public struct DacpObjectData
+    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+    public struct DacpThreadStoreData
     {
-        [FieldOffset(0)]
-        public ulong MethodTable;
-
         [FieldOffset(0x18)]
-        public ulong ElementTypeHandle;
+        public ulong FirstThread;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
