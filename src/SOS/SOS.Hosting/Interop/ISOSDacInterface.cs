@@ -30,7 +30,7 @@ namespace SOS.Hosting.Interop
         // Modules
         [PreserveSig] int GetModule(ulong address, out IXCLRDataModule module);
         [PreserveSig] int GetModuleData(ulong module, DacpModuleData* data);
-        [PreserveSig] int TraverseModuleMap(int mapType, ulong module, delegate* unmanaged[Cdecl]<uint, ulong, void*, void> callback, void* token);
+        [PreserveSig] int TraverseModuleMap(ModuleMapType mapType, ulong module, delegate* unmanaged[Cdecl]<uint, ulong, void*, void> callback, void* token);
         [PreserveSig] int GetAssemblyModuleList(ulong assembly, uint count, ulong* modules, uint* needed);
         [PreserveSig] int GetILForModule(ulong module, uint rva, ulong* il);
 
@@ -211,6 +211,9 @@ namespace SOS.Hosting.Interop
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct DacpModuleData
     {
+        // Desktop CLR and CoreCLR use different bits.
+        public const uint EditAndContinueFlags = 0x208;
+
         public ulong Address;
         public ulong PEAssembly;
         public ulong ILBase;
@@ -232,5 +235,11 @@ namespace SOS.Hosting.Interop
         public ulong LoaderAllocator;
         public ulong ThunkHeap;
         public ulong ModuleIndex;
+    }
+
+    public enum ModuleMapType
+    {
+        TypeDefToMethodTable,
+        TypeRefToMethodTable,
     }
 }

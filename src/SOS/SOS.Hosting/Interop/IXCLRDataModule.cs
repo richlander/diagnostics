@@ -62,4 +62,19 @@ namespace SOS.Hosting.Interop
         [PreserveSig] int EndEnumAppDomains(ulong handle);
         [PreserveSig] int GetVersionId(Guid* version);
     }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 8)]
+    public struct DacpGetModuleData
+    {
+        public const uint RequestCode = 0xf0000001;
+
+        public int IsDynamic;
+        public int IsInMemory;
+        public int IsFileLayout;
+        public ulong PEAssembly;
+        public ulong LoadedPEAddress;
+        public ulong LoadedPESize;
+        public ulong InMemoryPdbAddress;
+        public ulong InMemoryPdbSize;
+    }
 }
